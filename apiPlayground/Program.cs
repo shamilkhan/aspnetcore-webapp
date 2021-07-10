@@ -13,7 +13,6 @@ namespace apiPlayground
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(args);
             CreateHostBuilder(args).Build().Run();
         }
 
