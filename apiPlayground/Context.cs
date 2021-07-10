@@ -7,7 +7,7 @@ namespace apiPlayground
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=MyDatabase.db");
+            optionsBuilder.UseSqlite("Filename=local.db");
         }
     }
 }
