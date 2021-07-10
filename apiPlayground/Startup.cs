@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace apiPlayground
 {
@@ -31,6 +32,10 @@ namespace apiPlayground
         {
             services.AddEntityFrameworkSqlite().AddDbContext<DatabaseContext>();
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v0.1", new OpenApiInfo { Title = "My API", Version = "v0.1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +51,13 @@ namespace apiPlayground
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v0.1/swagger.json", "My API V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {
